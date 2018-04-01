@@ -5,6 +5,7 @@ module ChinaSMS
     module Wanxiang
       extend self
 
+
       URL = "https://way.jd.com"
       Provider = "kaixintong/kaixintong"
 
