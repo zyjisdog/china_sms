@@ -26,17 +26,16 @@ module ChinaSMS
 
       def to(phone, content, options)
         phones = Array(phone).join(',')
-        res = Net::HTTP.post_form(URI.parse("#{URL}/#{Provider}"), mobile: phones, content: content,appkey: options[:password])
-        result res.body
+        res = Net::HTTP.post_form(URI.parse("#{URL}/#{Provider}"), mobile: phones, content: content, appkey: options[:password])
+        result JSON[res.body]
       end
 
       def result(body)
-        JSON.parse body
         {
-          success: body['code'] == "10000",
-          code: body['code'],
-          message: body['msg'],
-          charge: body['charge']
+          success: body["code"] == "10000",
+          code: body["code"],
+          message: body["msg"],
+          charge: body["charge"]
         }
       end
 
